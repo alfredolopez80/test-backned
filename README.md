@@ -38,11 +38,14 @@ One way to remove all the cars containing illegal goods from the sequence is to
 
 ● removeacarfromtheleftend3times.Timetakenis3\*1=3. This obtains a total time of 3.
 
-Another way to remove all the cars containing illegal goods from the sequence is to ● remove the car containing illegal goods found in the middle. Time taken is 2.
+Another way to remove all the cars containing illegal goods from the sequence is to
+● remove the car containing illegal goods found in the middle. Time taken is 2.
 
 This obtains a total time of 2.
 
-Another way to remove all the cars containing illegal goods from the sequence is to ● removeacarfromtherightend2times.Timetakenis2\*1=2.
+Another way to remove all the cars containing illegal goods from the sequence is to
+● removeacarfromtherightend2times.Timetakenis2\*1=2.
+
 This obtains a total time of 2.
 
 2 is the minimum time taken to remove all the cars containing illegal goods. There are no other ways to remove them with less time.
