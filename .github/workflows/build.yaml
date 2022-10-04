@@ -1,0 +1,54 @@
+name: Build
+on:
+  push:
+    branches:
+      - development
+    tags-ignore:
+      - '*'
+    paths-ignore:
+    - ".github/**"
+env:
+  REGISTRY: ghcr.io
+  IMAGE_BASE_NAME: ${{ github.repository }}
+  CR_PAT: ${{ secrets.CR_PAT }}
+  GHCR_USER: ${{ secrets.GHCR_USER }}
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+jobs:
+
+  cleaner:
+    runs-on:  [ "self-hosted", "linux", "x64", "dev1" ]
+    steps:
+      - name: Clean runner workspace path
+        run: |
+          echo "Cleaning up previous run"
+          rm -rf "${{ github.workspace }}"
+
+  build:
+    needs: [cleaner]
+    runs-on:  [ "self-hosted", "linux", "x64", "dev1" ]
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Build
+        uses: ./.github/actions/buildapp
+        with:
+          env: "dev"
+
+      - name: Tag snapshot
+        uses: tvdias/github-tagger@v0.0.1
+        with:
+          repo-token: ${{ secrets.ACCESS_TOKEN }}
+          tag: ${{ github.run_number }}
+
+
+  publish:
+    needs: [build]
+    runs-on:  [ "self-hosted", "linux", "x64", "dev1" ]
+    steps:
+
+      - name: Publish
+        uses: ./.github/actions/publish
+
+  
