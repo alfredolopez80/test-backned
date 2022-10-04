@@ -24,7 +24,8 @@ One way to remove all the cars containing illegal goods from the sequence is to
 ● remove the car containing illegal goods found in the middle. Time taken is 2.
 This obtains a total time of 2 + 1 + 2 = 5.
 An alternative way is to
-● removeacarfromtheleftend2times.Timetakenis2*1=2. ● removeacarfromtherightend3times.Timetakenis3\*1=3.
+● removeacarfromtheleftend2times.Timetakenis2*1=2.
+● removeacarfromtherightend3times.Timetakenis3\*1=3.
 This also obtains a total time of 2 + 3 = 5.
 5 is the minimum time taken to remove all the cars containing illegal goods. There are no other ways to remove them with less time.
 
@@ -34,11 +35,16 @@ INPUT: s = "0010"
 OUTPUT: 2
 EXPLANATION:
 One way to remove all the cars containing illegal goods from the sequence is to
-● removeacarfromtheleftend3times.Timetakenis3*1=3. This obtains a total time of 3.
+
+● removeacarfromtheleftend3times.Timetakenis3\*1=3. This obtains a total time of 3.
+
 Another way to remove all the cars containing illegal goods from the sequence is to ● remove the car containing illegal goods found in the middle. Time taken is 2.
+
 This obtains a total time of 2.
-Another way to remove all the cars containing illegal goods from the sequence is to ● removeacarfromtherightend2times.Timetakenis2*1=2.
+
+Another way to remove all the cars containing illegal goods from the sequence is to ● removeacarfromtherightend2times.Timetakenis2\*1=2.
 This obtains a total time of 2.
+
 2 is the minimum time taken to remove all the cars containing illegal goods. There are no other ways to remove them with less time.
 Constraints
 
@@ -51,6 +57,12 @@ const postMinimalTime = async (req, res, next) => {
     try {
         const string = req.body.string.toString();
         let length = string.length;
+        if (length == 0) {
+            throw new Error("String can't be empty");
+        }
+        if (length > 200000 - string.slice(length - 1)) {
+            throw new Error("String length can't be greater than 200000");
+        }
         let left = 0;
         let result = length;
 
