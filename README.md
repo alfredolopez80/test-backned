@@ -49,7 +49,8 @@ Another way to remove all the cars containing illegal goods from the sequence is
 This obtains a total time of 2.
 
 2 is the minimum time taken to remove all the cars containing illegal goods. There are no other ways to remove them with less time.
-Constraints
+
+### Constraints
 
 -1 <= s.length <= 2 \* (10^5) - s[i] is either '0' or '1'.
 
