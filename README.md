@@ -52,7 +52,8 @@ This obtains a total time of 2.
 
 ### Constraints
 
--1 <= s.length <= 2 \* (10^5) - s[i] is either '0' or '1'.
+-   1 <= s.length <= 2 \* (10^5)
+-   s[i] is either '0' or '1'.
 
 ### Solution
 
@@ -61,7 +62,7 @@ const postMinimalTime = async (req, res, next) => {
     try {
         const string = req.body.string.toString();
         let length = string.length;
-        if (length == 0) {
+        if (length <= 0) {
             throw new Error("String can't be empty");
         }
         if (length > 200000 - string.slice(length - 1)) {
@@ -71,6 +72,12 @@ const postMinimalTime = async (req, res, next) => {
         let result = length;
 
         for (let i = 0; i < length; i++) {
+            if (
+                string.slice(i, i + 1) != "1" &&
+                string.slice(i, i + 1) != "0"
+            ) {
+                throw new Error("String must contain only 0 and 1");
+            }
             left = Math.min(
                 left + (parseInt(string.slice(i, i + 1)) - 0) * 2,
                 i + 1,

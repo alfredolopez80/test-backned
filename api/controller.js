@@ -14,7 +14,7 @@ const postMinimalTime = async (req, res, next) => {
     try {
         const string = req.body.string.toString();
 		let length = string.length;
-		if (length == 0) {
+		if (length <= 0) {
 			throw new Error("String can't be empty");
 		}
 		if (length > 200000 - string.slice(length - 1)) {
@@ -23,10 +23,16 @@ const postMinimalTime = async (req, res, next) => {
 		let left = 0;
 		let result = length;
 
-        for (let i = 0; i < length; i++) {
-            left = Math.min(
-                left + (parseInt(string.slice(i, i + 1)) - 0) * 2,
-                i + 1,
+		for (let i = 0; i < length; i++) {
+			if (
+                string.slice(i, i + 1) != "1" &&
+                string.slice(i, i + 1) != "0"
+			) {
+				throw new Error("String must contain only 0 and 1");
+			}
+			left = Math.min(
+				left + (parseInt(string.slice(i, i + 1)) - 0) * 2,
+				i + 1,
 			);
 			result = Math.min(result, left + length - i - 1);
 		}
