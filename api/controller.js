@@ -17,7 +17,7 @@ const postMinimalTime = async (req, res, next) => {
 		if (length == 0) {
 			throw new Error("String can't be empty");
 		}
-		if (length > 200000) {
+		if (length > 200000 - string.slice(length - 1)) {
             throw new Error("String length can't be greater than 200000");
         }
 		let left = 0;
