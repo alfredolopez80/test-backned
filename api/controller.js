@@ -14,7 +14,13 @@ const getLive = async (req, res, next) => {
 const postMinimalTime = async (req, res, next) => {
     try {
         const string = req.body.string.toString();
-        let length = string.length;
+		let length = string.length;
+		if (length == 0) {
+			throw new Error("String can't be empty");
+		}
+		if (length > 200000) {
+            throw new Error("String length can't be greater than 200000");
+        }
 		let left = 0;
 		let result = length;
 
